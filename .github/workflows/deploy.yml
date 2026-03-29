@@ -59,6 +59,11 @@ jobs:
             --exclude ".github/*" \
             --exclude "*.sh" \
             --exclude ".git/*" \
+            --exclude "CLAUDE.md" \
+            --exclude "music/*.mp3" \
+            --exclude "music/*.wav" \
+            --exclude "music/*.pdf" \
+            --exclude "code/*.py" \
             --delete \
             --cache-control "max-age=300"
 
