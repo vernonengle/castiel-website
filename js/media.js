@@ -27,6 +27,8 @@
     for (const track of manifest.tracks) {
       const card = document.createElement('div');
       card.className = 'audio-card';
+      const mime = track.file.endsWith('.wav') ? 'audio/wav' : 'audio/mpeg';
+      const encodedFile = track.file.split('/').map(encodeURIComponent).join('/');
       card.innerHTML = `
         <div class="audio-header">
           <span class="audio-icon">🎵</span>
@@ -34,9 +36,10 @@
             <div class="audio-title">${escHtml(track.title)}</div>
             ${track.description ? `<div class="audio-desc">${escHtml(track.description)}</div>` : ''}
           </div>
+          ${track.sheet_music ? `<a class="sheet-music-btn" href="${escHtml(track.sheet_music)}" target="_blank" title="View sheet music">🎼</a>` : ''}
         </div>
         <audio controls preload="none">
-          <source src="${escHtml(track.file)}" type="audio/mpeg">
+          <source src="${encodedFile}" type="${mime}">
           Your browser does not support audio playback.
         </audio>`;
       container.appendChild(card);

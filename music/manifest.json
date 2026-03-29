@@ -1,3 +1,76 @@
 {
-  "tracks": []
+  "tracks": [
+    {
+      "title": "Daddy's New Ringtone",
+      "description": "Feb 2023",
+      "file": "music/daddys-new-ringtone.wav"
+    },
+    {
+      "title": "Mommy's New Ringtone",
+      "description": "Feb 2023",
+      "file": "music/mommys-new-ringtone.wav"
+    },
+    {
+      "title": "Out of the Untitled",
+      "description": "Feb 2023",
+      "file": "music/out-of-the-untitled.wav"
+    },
+    {
+      "title": "Tita Fatu's New Ringtone",
+      "description": "Feb 2023",
+      "file": "music/tita-fatus-new-ringtone.wav"
+    },
+    {
+      "title": "Circle of Fifths (Arpeggio)",
+      "description": "Feb 2023",
+      "file": "music/circle-of-fifths-arpeggio.mp3"
+    },
+    {
+      "title": "Detector's Loss",
+      "description": "Feb 2023",
+      "file": "music/detectors-loss.mp3"
+    },
+    {
+      "title": "A Birthday Win",
+      "description": "Feb 2023",
+      "file": "music/a-birthday-win.mp3"
+    },
+    {
+      "title": "I Have No Idea How to Name This Thing",
+      "description": "Jul 2024",
+      "file": "music/i-have-no-idea.mp3"
+    },
+    {
+      "title": "The Nomination",
+      "description": "Aug 2024",
+      "file": "music/the-nomination.mp3"
+    },
+    {
+      "title": "Toreador",
+      "description": "Sep 2024",
+      "file": "music/toreador.mp3",
+      "sheet_music": "music/toreador.pdf"
+    },
+    {
+      "title": "Toreador (Trimmed)",
+      "description": "Sep 2024",
+      "file": "music/toreador-trimmed.mp3",
+      "sheet_music": "music/toreador.pdf"
+    },
+    {
+      "title": "Random Oxytocin",
+      "description": "Jul 2025",
+      "file": "music/random-oxytocin.mp3"
+    },
+    {
+      "title": "It's a Gamble",
+      "description": "Feb 2025",
+      "file": "music/its-a-gamble.wav"
+    },
+    {
+      "title": "Reel-y Good Music",
+      "description": "Sep 2025",
+      "file": "music/reel-y-good-music.mp3"
+    }
+  ]
 }

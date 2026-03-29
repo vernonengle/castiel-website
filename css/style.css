@@ -332,6 +332,16 @@ section + section { border-top: 1px solid var(--card-border); }
   margin-bottom: 12px;
 }
 .audio-icon { font-size: 1.6rem; }
+
+.sheet-music-btn {
+  margin-left: auto;
+  font-size: 1.4rem;
+  text-decoration: none;
+  opacity: 0.7;
+  transition: opacity 0.2s, transform 0.2s;
+  flex-shrink: 0;
+}
+.sheet-music-btn:hover { opacity: 1; transform: scale(1.15); }
 .audio-title {
   font-weight: 600;
   color: var(--aqua);
