@@ -40,7 +40,9 @@ castiel/
 | Hosted Zone | `Z09985112EN35EV3NZ658` |
 | S3 Bucket | `castiel-engle-com` (ap-southeast-1, private + OAC) |
 | CloudFront | TBD after deploy (see CloudFormation outputs) |
-| ACM cert | TBD — request in us-east-1, DNS-validate via Route 53 |
+| ACM cert | `arn:aws:acm:us-east-1:828788451819:certificate/698d1b3f-3e1e-4e49-8804-929215b80299` |
+| CloudFront ID | `E370LUOTLERJVQ` |
+| CloudFront domain | `d3813ectey03ux.cloudfront.net` |
 | IAM role (Claude) | `claude-castiel-deploy-role` |
 | IAM role (GitHub) | `github-actions-castiel-role` |
 | CloudFormation stacks | `castiel-iam`, `castiel-engle-com` |
@@ -90,9 +92,9 @@ git push origin main
 
 # Manual sync + cache bust
 AWS_PROFILE=claude-castiel aws s3 sync . s3://castiel-engle-com \
-  --exclude "infra/*" --exclude ".github/*" --exclude "*.sh" --delete
+  --exclude "infra/*" --exclude ".github/*" --exclude "*.sh" --exclude ".git/*" --exclude "CLAUDE.md" --delete
 AWS_PROFILE=claude-castiel aws cloudfront create-invalidation \
-  --distribution-id <DIST_ID> --paths "/*"
+  --distribution-id E370LUOTLERJVQ --paths "/*"
 ```
 
 ## Adding Castiel's Content
