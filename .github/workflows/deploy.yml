@@ -64,6 +64,7 @@ jobs:
             --exclude "music/*.wav" \
             --exclude "music/*.pdf" \
             --exclude "code/*.py" \
+            --exclude "assets/images/*" \
             --delete \
             --cache-control "max-age=300"
 
