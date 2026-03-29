@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Castiel Engle</title>
+  <meta name="description" content="Hi, I'm Castiel — I love music, coding, math, science, books, and movies." />
+
+  <!-- Prism.js syntax highlighting (Python) -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" />
+
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+  <!-- ── Navigation ──────────────────────────────────────── -->
+  <nav>
+    <span class="nav-logo">∞ Castiel</span>
+    <a href="#music">Music</a>
+    <a href="#coding">Coding</a>
+    <a href="#science">Science</a>
+    <a href="#books">Books</a>
+    <a href="#movies">Movies</a>
+  </nav>
+
+  <!-- ── Hero ────────────────────────────────────────────── -->
+  <section id="hero">
+    <canvas id="starfield" aria-hidden="true"></canvas>
+    <div class="hero-content">
+      <div class="hero-greeting">Hello, world!</div>
+      <h1 class="hero-name">Castiel Engle</h1>
+      <p class="hero-tagline">
+        Drummer &nbsp;·&nbsp; Pianist &nbsp;·&nbsp; Coder &nbsp;·&nbsp; Explorer of Infinity
+      </p>
+      <div class="hero-chips">
+        <span class="chip">🥁 Drums</span>
+        <span class="chip">🎹 Piano</span>
+        <span class="chip">🐍 Python</span>
+        <span class="chip">🔢 Math</span>
+        <span class="chip">🔭 Astronomy</span>
+        <span class="chip">📚 Books</span>
+      </div>
+      <div class="hero-infinity" title="Infinity">∞</div>
+    </div>
+    <div class="hero-scroll">
+      <div class="scroll-arrow"></div>
+      <span>scroll</span>
+    </div>
+  </section>
+
+  <!-- ── Music ───────────────────────────────────────────── -->
+  <section id="music">
+    <div class="reveal">
+      <div class="section-label">Section 01</div>
+      <h2 class="section-title">
+        Music
+        <span class="note-float">♩</span>
+        <span class="note-float">♪</span>
+        <span class="note-float">♫</span>
+        <span class="note-float">♬</span>
+      </h2>
+      <p class="section-body">
+        I play drums and piano, and I compose music with MuseScore.
+        Creating rhythms on the kit or building chords on the keys —
+        music is how I express things words can't always say.
+      </p>
+
+      <div class="music-instruments">
+        <div class="instrument-badge">
+          <span class="badge-icon">🥁</span>
+          <div>
+            <div class="badge-name">Drums</div>
+            <div class="badge-sub">Rhythm &amp; beats</div>
+          </div>
+        </div>
+        <div class="instrument-badge">
+          <span class="badge-icon">🎹</span>
+          <div>
+            <div class="badge-name">Piano</div>
+            <div class="badge-sub">Melody &amp; harmony</div>
+          </div>
+        </div>
+        <div class="instrument-badge">
+          <span class="badge-icon">🎼</span>
+          <div>
+            <div class="badge-name">MuseScore</div>
+            <div class="badge-sub">Composition &amp; notation</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="compositions-heading">
+        🎵 My Compositions
+      </div>
+      <div id="music-player-container">
+        <p class="media-note">Loading compositions…</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Coding ──────────────────────────────────────────── -->
+  <section id="coding">
+    <div class="reveal">
+      <div class="section-label">Section 02</div>
+      <h2 class="section-title">Coding</h2>
+      <p class="section-body">
+        I started coding with Scratch — building games by snapping blocks together.
+        Now I write Python and I'm making a text-based RPG where you explore dungeons,
+        fight monsters, and collect treasure. Every bug I squash makes the game better!
+      </p>
+
+      <div class="coding-tools">
+        <div class="tool-chip">
+          <span class="tool-icon">🧩</span>
+          <div>
+            <div style="font-weight:600;color:var(--text)">Scratch</div>
+            <div style="font-size:0.78rem;color:var(--text-muted)">Block-based</div>
+          </div>
+        </div>
+        <div class="tool-chip">
+          <span class="tool-icon">🐍</span>
+          <div>
+            <div style="font-weight:600;color:var(--text)">Python</div>
+            <div style="font-size:0.78rem;color:var(--text-muted)">Text-based RPG</div>
+          </div>
+        </div>
+        <div class="tool-chip">
+          <span class="tool-icon">🌐</span>
+          <div>
+            <div style="font-weight:600;color:var(--text)">HTML / CSS</div>
+            <div style="font-size:0.78rem;color:var(--text-muted)">This site!</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="compositions-heading">🐍 My Python Scripts</div>
+      <div class="code-viewer-wrap">
+        <div id="code-script-list">
+          <p class="media-note">Loading scripts…</p>
+        </div>
+        <div id="code-viewer">
+          <div class="code-viewer-header">
+            <span id="code-viewer-title"></span>
+            <a id="code-download-btn" class="download-btn" href="#" download>
+              ⬇ Download
+            </a>
+          </div>
+          <pre id="code-viewer-pre"><code id="code-viewer-code" class="language-python"></code></pre>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Math & Science ──────────────────────────────────── -->
+  <section id="science">
+    <div class="reveal">
+      <div class="section-label">Section 03</div>
+      <h2 class="section-title">Math &amp; Science</h2>
+      <p class="section-body">
+        Math isn't just numbers — it's the language of patterns, infinity, and the universe.
+        I love fractals (shapes that zoom forever!), the mysteries of outer space,
+        and the fact that some infinities are bigger than others.
+      </p>
+
+      <div class="fractal-wrap">
+        <div class="compositions-heading">🌀 Mandelbrot Set — Interactive Fractal</div>
+        <div class="fractal-label">
+          Click to zoom in &nbsp;·&nbsp; Right-click to zoom out &nbsp;·&nbsp; Double-click to reset
+        </div>
+        <canvas id="mandelbrot" title="Interactive Mandelbrot fractal"></canvas>
+      </div>
+
+      <div class="science-facts">
+        <div class="fact-card">
+          <div class="fact-icon">∞</div>
+          <div class="fact-title">Infinity</div>
+          <div class="fact-body">
+            Some infinities are bigger than others. The infinite decimals between 0 and 1
+            are MORE infinite than all the whole numbers!
+          </div>
+        </div>
+        <div class="fact-card">
+          <div class="fact-icon">🌀</div>
+          <div class="fact-title">Fractals</div>
+          <div class="fact-body">
+            The Mandelbrot set is a shape with infinite detail — zoom in forever
+            and you'll always find more complexity hiding inside.
+          </div>
+        </div>
+        <div class="fact-card">
+          <div class="fact-icon">🪐</div>
+          <div class="fact-title">Saturn's Rings</div>
+          <div class="fact-body">
+            Saturn's rings are made of billions of ice and rock chunks.
+            They stretch 282,000 km wide but are only ~10 meters thick.
+          </div>
+        </div>
+        <div class="fact-card">
+          <div class="fact-icon">⭐</div>
+          <div class="fact-title">Stars</div>
+          <div class="fact-body">
+            The observable universe contains an estimated 2 trillion galaxies,
+            each with hundreds of billions of stars.
+          </div>
+        </div>
+        <div class="fact-card">
+          <div class="fact-icon">🧮</div>
+          <div class="fact-title">Prime Numbers</div>
+          <div class="fact-body">
+            Primes go on forever — there are infinitely many of them,
+            and no one fully understands their mysterious pattern.
+          </div>
+        </div>
+        <div class="fact-card">
+          <div class="fact-icon">🔭</div>
+          <div class="fact-title">Black Holes</div>
+          <div class="fact-body">
+            At the center of a black hole, our equations break down.
+            Physics as we know it stops working — which means
+            there's still so much left to discover!
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Books ───────────────────────────────────────────── -->
+  <section id="books">
+    <div class="reveal">
+      <div class="section-label">Section 04</div>
+      <h2 class="section-title">Books</h2>
+      <p class="section-body">
+        A good book is a portal to another world. Whether it's Dog Man's hilariously
+        dramatic adventures or the magic of Hogwarts, I love getting lost in stories.
+      </p>
+
+      <div class="books-grid">
+        <div class="book-card">
+          <div class="book-cover">🐶</div>
+          <div class="book-title">Dog Man</div>
+          <div class="book-author">Dav Pilkey</div>
+          <div class="book-tag">Graphic Novel</div>
+        </div>
+        <div class="book-card">
+          <div class="book-cover">🪄</div>
+          <div class="book-title">Harry Potter</div>
+          <div class="book-author">J.K. Rowling</div>
+          <div class="book-tag">Fantasy</div>
+        </div>
+        <div class="book-card">
+          <div class="book-cover">🔦</div>
+          <div class="book-title">Diary of a Wimpy Kid</div>
+          <div class="book-author">Jeff Kinney</div>
+          <div class="book-tag">Comedy</div>
+        </div>
+        <div class="book-card">
+          <div class="book-cover">🌌</div>
+          <div class="book-title">A Wrinkle in Time</div>
+          <div class="book-author">Madeleine L'Engle</div>
+          <div class="book-tag">Sci-Fi</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Movies ──────────────────────────────────────────── -->
+  <section id="movies">
+    <div class="reveal">
+      <div class="section-label">Section 05</div>
+      <h2 class="section-title">Movies</h2>
+      <p class="section-body">
+        Great animated films have incredible music, amazing worlds, and stories that
+        make you feel things. These are some of my favourites.
+      </p>
+
+      <div class="movies-grid">
+        <div class="movie-card">
+          <div class="movie-poster">🦊</div>
+          <div class="movie-info">
+            <div class="movie-title">Zootopia</div>
+            <div class="movie-year">2016</div>
+            <div class="movie-note">"Anyone can be anything."</div>
+          </div>
+        </div>
+        <div class="movie-card">
+          <div class="movie-poster">🐉</div>
+          <div class="movie-info">
+            <div class="movie-title">How to Train Your Dragon</div>
+            <div class="movie-year">2010</div>
+            <div class="movie-note">Toothless is the best.</div>
+          </div>
+        </div>
+        <div class="movie-card">
+          <div class="movie-poster">🌊</div>
+          <div class="movie-info">
+            <div class="movie-title">Moana</div>
+            <div class="movie-year">2016</div>
+            <div class="movie-note">The ocean chose her.</div>
+          </div>
+        </div>
+        <div class="movie-card">
+          <div class="movie-poster">🤖</div>
+          <div class="movie-info">
+            <div class="movie-title">WALL·E</div>
+            <div class="movie-year">2008</div>
+            <div class="movie-note">A love story across the stars.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Footer ──────────────────────────────────────────── -->
+  <footer>
+    <div class="footer-infinity">∞</div>
+    <div class="footer-made">Made by Castiel Engle &nbsp;·&nbsp; castiel-engle.com</div>
+  </footer>
+
+  <!-- ── Scripts ─────────────────────────────────────────── -->
+  <!-- Prism.js syntax highlighting -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-python.min.js"></script>
+
+  <script src="js/stars.js"></script>
+  <script src="js/fractal.js"></script>
+  <script src="js/media.js"></script>
+
+  <!-- Scroll-reveal: watch .reveal elements -->
+  <script>
+    (function () {
+      const obs = new IntersectionObserver(entries => {
+        entries.forEach(e => {
+          if (e.isIntersecting) {
+            e.target.classList.add('visible');
+            obs.unobserve(e.target);
+          }
+        });
+      }, { threshold: 0.08 });
+      document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+    })();
+  </script>
+</body>
+</html>

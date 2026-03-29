@@ -1,0 +1,181 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Description: >
+  IAM bootstrap for castiel-engle.com.
+  Creates the deploy policy + two roles (Claude CLI + GitHub Actions OIDC).
+  Deploy this ONCE with admin credentials, then use claude-castiel profile for everything else.
+
+Parameters:
+  GitHubOrg:
+    Type: String
+    Default: vernonengle
+  GitHubRepo:
+    Type: String
+    Default: castiel-website
+  GitHubEnvironment:
+    Type: String
+    Default: production
+    Description: GitHub Actions environment name (used in OIDC sub claim)
+
+Resources:
+
+  # ── IAM Policy ────────────────────────────────────────────
+  CastielDeployPolicy:
+    Type: AWS::IAM::ManagedPolicy
+    Properties:
+      ManagedPolicyName: castiel-deploy-policy
+      Description: S3 + CloudFront + Route53 + ACM + CloudFormation for castiel-engle.com
+      PolicyDocument:
+        Version: '2012-10-17'
+        Statement:
+          - Sid: S3BucketManagement
+            Effect: Allow
+            Action:
+              - s3:CreateBucket
+              - s3:DeleteBucket
+              - s3:PutBucketPolicy
+              - s3:DeleteBucketPolicy
+              - s3:GetBucketPolicy
+              - s3:GetBucketLocation
+              - s3:ListBucket
+              - s3:PutObject
+              - s3:GetObject
+              - s3:DeleteObject
+              - s3:PutBucketPublicAccessBlock
+              - s3:GetBucketPublicAccessBlock
+              - s3:PutBucketVersioning
+              - s3:GetBucketVersioning
+              - s3:PutBucketTagging
+              - s3:GetBucketTagging
+              - s3:GetEncryptionConfiguration
+              - s3:PutEncryptionConfiguration
+              - s3:PutBucketCORS
+              - s3:GetBucketCORS
+            Resource:
+              - arn:aws:s3:::castiel-engle-com
+              - arn:aws:s3:::castiel-engle-com/*
+
+          - Sid: S3ListAll
+            Effect: Allow
+            Action: s3:ListAllMyBuckets
+            Resource: '*'
+
+          - Sid: CloudFrontManagement
+            Effect: Allow
+            Action:
+              - cloudfront:CreateDistribution
+              - cloudfront:GetDistribution
+              - cloudfront:GetDistributionConfig
+              - cloudfront:UpdateDistribution
+              - cloudfront:DeleteDistribution
+              - cloudfront:TagResource
+              - cloudfront:ListDistributions
+              - cloudfront:CreateInvalidation
+              - cloudfront:GetInvalidation
+              - cloudfront:CreateOriginAccessControl
+              - cloudfront:GetOriginAccessControl
+              - cloudfront:UpdateOriginAccessControl
+              - cloudfront:DeleteOriginAccessControl
+              - cloudfront:ListOriginAccessControls
+              - cloudfront:GetCachePolicy
+              - cloudfront:GetOriginRequestPolicy
+              - cloudfront:GetResponseHeadersPolicy
+            Resource: '*'
+
+          - Sid: Route53Management
+            Effect: Allow
+            Action:
+              - route53:ChangeResourceRecordSets
+              - route53:GetHostedZone
+              - route53:ListHostedZones
+              - route53:ListResourceRecordSets
+              - route53:GetChange
+            Resource: '*'
+
+          - Sid: ACMManagement
+            Effect: Allow
+            Action:
+              - acm:RequestCertificate
+              - acm:DescribeCertificate
+              - acm:DeleteCertificate
+              - acm:ListCertificates
+              - acm:GetCertificate
+              - acm:AddTagsToCertificate
+              - acm:ListTagsForCertificate
+            Resource: '*'
+
+          - Sid: CloudFormationManagement
+            Effect: Allow
+            Action:
+              - cloudformation:CreateStack
+              - cloudformation:UpdateStack
+              - cloudformation:DeleteStack
+              - cloudformation:DescribeStacks
+              - cloudformation:DescribeStackEvents
+              - cloudformation:GetTemplate
+              - cloudformation:ListStackResources
+              - cloudformation:CreateChangeSet
+              - cloudformation:ExecuteChangeSet
+              - cloudformation:DescribeChangeSet
+              - cloudformation:DeleteChangeSet
+              - cloudformation:GetTemplateSummary
+              - cloudformation:ListStacks
+              - cloudformation:ValidateTemplate
+            Resource: '*'
+
+  # ── Claude CLI Role ───────────────────────────────────────
+  ClaudeCastielDeployRole:
+    Type: AWS::IAM::Role
+    Properties:
+      RoleName: claude-castiel-deploy-role
+      Description: Assumed by claude-cli for castiel-engle.com deployments
+      AssumeRolePolicyDocument:
+        Version: '2012-10-17'
+        Statement:
+          - Effect: Allow
+            Principal:
+              AWS: arn:aws:iam::828788451819:user/claude-cli
+            Action: sts:AssumeRole
+      ManagedPolicyArns:
+        - !Ref CastielDeployPolicy
+        - arn:aws:iam::aws:policy/ReadOnlyAccess
+      Tags:
+        - Key: actor
+          Value: claude
+        - Key: project
+          Value: castiel
+
+  # ── GitHub Actions OIDC Role ──────────────────────────────
+  GitHubActionsCastielRole:
+    Type: AWS::IAM::Role
+    Properties:
+      RoleName: github-actions-castiel-role
+      Description: GitHub Actions OIDC role for castiel-website repo deployments
+      AssumeRolePolicyDocument:
+        Version: '2012-10-17'
+        Statement:
+          - Effect: Allow
+            Principal:
+              Federated: !Sub arn:aws:iam::${AWS::AccountId}:oidc-provider/token.actions.githubusercontent.com
+            Action: sts:AssumeRoleWithWebIdentity
+            Condition:
+              StringEquals:
+                token.actions.githubusercontent.com:aud: sts.amazonaws.com
+              StringLike:
+                token.actions.githubusercontent.com:sub:
+                  !Sub 'repo:${GitHubOrg}/${GitHubRepo}:environment:${GitHubEnvironment}'
+      ManagedPolicyArns:
+        - !Ref CastielDeployPolicy
+      Tags:
+        - Key: actor
+          Value: github-actions
+        - Key: project
+          Value: castiel
+
+Outputs:
+  ClaudeRoleArn:
+    Value: !GetAtt ClaudeCastielDeployRole.Arn
+    Description: ARN for claude-castiel profile in ~/.aws/config
+
+  GitHubActionsRoleArn:
+    Value: !GetAtt GitHubActionsCastielRole.Arn
+    Description: ARN for GitHub Actions OIDC role (use in deploy.yml)
