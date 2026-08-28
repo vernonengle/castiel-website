@@ -1,0 +1,29 @@
+# Keeps castiel-website's GitHub Actions pins current.
+#
+# Dependabot searches /.github/workflows and a root action.yml, and nothing
+# else. That is why Forge's own templates/web-app/.github/workflows/ is not
+# covered by any Dependabot config — those files never execute, so Dependabot
+# does not treat them as workflows. scripts/check-template-drift.sh is what
+# reconciles the templates against the projects; Dependabot keeps the projects
+# current against upstream. The two halves do not overlap.
+#
+# Origin: 2026-08-28. bring-me, find-it and flip-seven had each been bumped by
+# hand to actions/checkout@v7 while the template sat on @v4, and nothing
+# noticed until GitHub started warning that @v4 runs on a deprecated Node.
+version: 2
+updates:
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "monthly"
+    # One PR for every action rather than one per action. These bump together
+    # in practice, and a single PR is one CI run and one review.
+    groups:
+      github-actions:
+        patterns:
+          - "*"
+    open-pull-requests-limit: 3
+    commit-message:
+      prefix: "ci"
+    labels:
+      - "dependencies"
